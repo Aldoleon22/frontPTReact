@@ -10,7 +10,7 @@ const Car = () => {
     
     const fetchData = async () => {
         try {
-            const vehicl =await axios("http://127.0.0.1:8000/api/listeVehicule")
+            const vehicl =await axios.get("http://127.0.0.1:8000/api/listeVehicul")
             setcarData(vehicl.data.vehicules);
             console.log(vehicl);
         } catch (error) {
@@ -46,7 +46,7 @@ const Car = () => {
                 <p>Matricule: <span>{aff.matricule}</span></p>
             </div>
             <div className="action">
-                 <Link className='modif' to='/Modifengin'>Modifier</Link>
+                 <Link className='modif' to={`/Modifengin/${aff.id}`}>Modifier</Link>
                 <button className='suppr' onClick={()=>handDelete(aff.id)}>Supprimer</button>
             </div>
             </div>
