@@ -13,6 +13,9 @@ import Inscription from '../inscription/Inscription';
 import AjoutEngin from '../AjoutEngin/AjoutEngin';
 import ModEngin from '../ModifEngine/ModEngin';
 import { Link, Route, Routes } from 'react-router-dom';
+import CarModifAd from '../Admin/CarAd/CarModifAd';
+import Modifcar from '../Admin/CarAd/Modifcar';
+
 
 // const [show,showset] = useState = false;
 
@@ -58,8 +61,9 @@ const Home = () => {
                         <Route path='/' element={<Car />} />
                         <Route path='/Inscription' element={<Inscription />} />
                         <Route path='/Addcar' element={<AjoutEngin />} />
-                        <Route path='/Modifengin' element={<ModEngin />} />
+                        <Route path='/Modifengin/:id' element={<CarModifAd />} />
                         <Route path='/User' element={<AllUser />} />
+                        <Route path='/Modifcar' element={<Modifcar />} />
                     </Routes>
                 </div>
             </div>
