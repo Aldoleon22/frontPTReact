@@ -19,7 +19,7 @@ import React, { useId } from 'react'
                 className="form-control"
                 value={value}
                 placeholder={placeholder}
-                onChange={(e) => onChange(e.target.value)}
+                // onChange={(e) => onChange(e.target.value)}
             />
     </div>
   )

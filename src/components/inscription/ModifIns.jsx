@@ -4,7 +4,7 @@ import Input from '../Form/Input';
 function ModifIns() {
     const [nomUser, setNomUser] = useState('Nom User')
     const [password, setPasswrod] = useState('Mot de Passe')
-    const [email; setEmail] = useState('email@email.com')
+    const [email, setEmail] = useState('email@email.com')
   return (
     <div className='Inscription'>
         <div className='form'>

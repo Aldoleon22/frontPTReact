@@ -5,13 +5,16 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import Car from "./components/Car/Car"
 import Inscription from "./components/inscription/Inscription"
 import { Route, Routes } from "react-router-dom"
+import axios from "axios"
+import { useState } from "react"
+import AdHome from "./components/Admin/Homadmin/AdHome"
 function App() {
   return (
     <>
-      {/* <Inscription/> */}
-      <Home/>
+      <AdHome/>
     </>
   )
+
 }
 
 export default App
