@@ -11,7 +11,7 @@ import AdHome from "./components/Admin/Homadmin/AdHome"
 function App() {
   return (
     <>
-      <AdHome/>
+      <Login/>
     </>
   )
 
