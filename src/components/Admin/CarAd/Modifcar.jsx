@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Modifcar.scss'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+
 const Modifcar = () => {
+    const {id} = useParams();
+    const [carModif, setcarModif] = useState([])
+
+    useEffect(()=>{
+        fetchModif();
+    },[id])
+
+    const fetchModif=async()=>{
+        try {
+            const affiche=await axios.get("http://127.0.0.1:8000/api/listeVehicule/"+id);
+            console.log(affiche.data.car);
+            setcarModif(affiche.data.car);
+        } catch (error) {
+            console.log("verifier le code");
+        }
+    }
     return (
         <div className='carmodif'>
             <div className="formulaire">
@@ -8,7 +27,7 @@ const Modifcar = () => {
                 <form action="">
                     <div className="inplab">
                         <label htmlFor="">Marque:</label>
-                        <input type="text" placeholder='HIUNDAY' />
+                        <input type="text" placeholder='HIUNDAY'  />
                     </div>
                     <div className="inplab">
                         <label htmlFor="">Matricule:</label>
