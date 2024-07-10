@@ -3,7 +3,7 @@ import './CarModifAd.scss'
 import Image from '../../../assets/image/46.jpg'
 import { FaUserEdit } from "react-icons/fa";
 import { Link, useParams } from 'react-router-dom';
-import { MdAddBox } from 'react-icons/md';
+import { MdAddBox, MdConnectedTv, MdDelete } from 'react-icons/md';
 import axios from 'axios';
 const CarModifAd = () => {
     const {id} = useParams();
@@ -56,7 +56,7 @@ const CarModifAd = () => {
                         <p>Voiture bien entretenue</p>
 
                         <div className="action">
-                            <Link className='linkcar' to={'/Modifcar'}><FaUserEdit className='icon' /></Link>
+                            <Link className='linkcar' to={`/Modifcar/${carChek.id}`}><FaUserEdit className='icon' /></Link>
                             <Link className='linkcar'><MdAddBox className='icon' for="file" /></Link>
                         </div>
                         <div className="gallerypar">
@@ -64,7 +64,7 @@ const CarModifAd = () => {
                             <div className="gallery">
                                 {
                                     Galerie.map((gal, i)=>
-                        
+                                    
                                     <img src={`http://127.0.0.1:8000/storage/GalerieVehicule/${gal.image}`} alt="" />
                                     )
 

@@ -63,7 +63,7 @@ const Home = () => {
                         <Route path='/Addcar' element={<AjoutEngin />} />
                         <Route path='/Modifengin/:id' element={<CarModifAd />} />
                         <Route path='/User' element={<AllUser />} />
-                        <Route path='/Modifcar' element={<Modifcar />} />
+                        <Route path='/Modifcar/:id' element={<Modifcar />} />
                     </Routes>
                 </div>
             </div>

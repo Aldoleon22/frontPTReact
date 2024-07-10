@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import Input from '../Form/Input'
 import './AjoutEngin.scss'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 function AjoutEngin() {
 const [file, setFile] = useState(null);
+const navigate =useNavigate();
 const [dataCar, setDataCar] = useState({
     marque:'',
     matricule:''
@@ -33,7 +35,7 @@ const submit = async (e) => {
             'Content-Type': 'multipart/form-data'
           }
         });
-  
+        navigate('/');
         console.log(response.data);
       } catch (error) {
         console.error('Error uploading the file:', error);
