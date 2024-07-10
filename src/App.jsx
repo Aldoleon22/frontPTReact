@@ -12,8 +12,8 @@ function App() {
     <>
       {/* <Inscription/> */}
       {/* <AdHome/> */}
-      {/* <Home/> */}
-      <UserVue/>
+      <Home/>
+      {/* <UserVue/> */}
     </>
   )
 }

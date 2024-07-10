@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import Close from '../../../assets/image/images.png'
+// import Close from '../../../assets/image/images.png'
 import {Link, Route} from 'react-router-dom';
 import Reserver from '../reservation/Reserver';
 
