@@ -13,6 +13,11 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (password !== cpassword) {
+      setError('Les mots de passe ne correspondent pas');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:8000/api/register', {
         name: nom,
@@ -24,11 +29,21 @@ function Register() {
       // Redirection ou autre logique après inscription réussie
 
     } catch (error) {
-      setError('Erreur lors de l\'inscription');
-      console.error('Erreur lors de l\'inscription:', error);
+      if (error.response) {
+        // La requête a été faite et le serveur a répondu avec un statut code qui n'est pas dans les 2xx
+        setError(`Erreur lors de l'inscription: ${error.response.data.message || error.response.data}`);
+        console.error('Erreur lors de l\'inscription:', error.response.data);
+      } else if (error.request) {
+        // La requête a été faite mais aucune réponse n'a été reçue
+        setError('Aucune réponse du serveur');
+        console.error('Requête:', error.request);
+      } else {
+        // Quelque chose s'est passé en configurant la requête qui a déclenché une erreur
+        setError('Erreur lors de l\'inscription');
+        console.error('Erreur:', error.message);
+      }
     }
   };
-
   return (
     <div className='register'>
       <div className='form'>

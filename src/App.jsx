@@ -6,12 +6,14 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import Car from "./components/Car/Car"
 import Inscription from "./components/inscription/Inscription"
 import { Route, Routes } from "react-router-dom"
+import UserVue from "./components/VueUser/UserVue"
 function App() {
   return (
     <>
       {/* <Inscription/> */}
       {/* <AdHome/> */}
-      <Home/>
+      {/* <Home/> */}
+      <UserVue/>
     </>
   )
 }
