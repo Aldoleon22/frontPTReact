@@ -11,7 +11,11 @@ function App() {
     <>
       {/* <Inscription/> */}
       {/* <AdHome/> */}
-      <Home/>
+      
+      <Routes>
+        <Route path='/Home' element={<Home />} />
+        <Route path='/Login' element={<Login />} />
+      </Routes>
     </>
   )
 }
