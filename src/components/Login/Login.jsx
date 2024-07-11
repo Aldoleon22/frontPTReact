@@ -1,18 +1,14 @@
-import React, { useState,  useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import './Login.scss';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { TokenContext } from '../../TokenContext';
-
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [access_token, setAcces_token] = useState('');
-  const [isToken, setIsToken] = useContext(TokenContext);
-
+  const [, setIsToken] = useContext(TokenContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,21 +18,38 @@ const Login = () => {
         email,
         password,
       });
-      
-      if (response !== undefined && response.data.access_token) {
-        setIsToken(true) 
- // Rediriger vers la page d'accueil après une connexion réussie
-      navigate('/Home')
-      }
 
-     
+      if (response.data && response.data.access_token) {
+        setIsToken(true);
+
+        // Rediriger en fonction du statut de l'utilisateur
+        const userStatus = response.data.role;
+       console.log(userStatus);
       
-  
+        switch (userStatus) {
+          case 'superAdmin':
+            console.log('Connecté en tant que SuperAdmin');
+            navigate('/superadmin');
+            break;
+          case 'admin':
+            console.log('Connecté en tant qu Admin');
+            navigate('/admin');
+            break;
+          default:
+            console.log('Connecté en tant que User');
+            navigate('/home');
+            break;
+        }
+      } else {
+        setError('Invalid login details');
+      }
     } catch (error) {
-      // Gérer les erreurs
-      setError('Invalid login details');
-      
-            
+      console.log(error);
+      if (error.response && error.response.data) {
+        setError(error.response.data.message);
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
