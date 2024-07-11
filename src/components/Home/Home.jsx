@@ -1,25 +1,29 @@
-import React, { useState } from 'react'
-import './Home.scss'
-import { TfiSearch } from "react-icons/tfi";
-import { TfiPowerOff } from "react-icons/tfi";
-import { FaHome } from "react-icons/fa";
-import { IoPersonAdd } from "react-icons/io5";
-import { MdAddBox } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
-import Image from "../../assets/image/46.jpg";
-import AllUser from "../AllUser/AllUser"
-import Car from "../Car/Car"
+import React from 'react';
+import './Home.scss';
+import { TfiSearch, TfiPowerOff } from 'react-icons/tfi';
+import { FaHome, FaRegUser } from 'react-icons/fa';
+import { IoPersonAdd } from 'react-icons/io5';
+import { MdAddBox } from 'react-icons/md';
+import Image from '../../assets/image/46.jpg';
+import AllUser from '../AllUser/AllUser';
+import Car from '../Car/Car';
 import Inscription from '../inscription/Inscription';
 import AjoutEngin from '../AjoutEngin/AjoutEngin';
-import ModEngin from '../ModifEngine/ModEngin';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import CarModifAd from '../Admin/CarAd/CarModifAd';
 import Modifcar from '../Admin/CarAd/Modifcar';
 
-
-// const [show,showset] = useState = false;
-
 const Home = () => {
+    const navigate = useNavigate();
+    const userName = localStorage.getItem('userName'); // Récupérer le nom de l'utilisateur depuis le localStorage
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userStatus');
+        localStorage.removeItem('userName'); // Supprimer le nom de l'utilisateur lors de la déconnexion
+        navigate('/login');
+    }
+
     return (
         <div className="content-home">
             <header className='header'>
@@ -34,13 +38,11 @@ const Home = () => {
 
                     <div className="user">
                         <img src={Image} alt="" className='imgprof' width={"30px"} />
-                        <p>Jhon Doe</p>
-
+                        <p>{userName}</p> {/* Afficher le nom de l'utilisateur ici */}
                         <div className="out">
-                            <a href="" className='logout'><TfiPowerOff /></a>
+                            <button className='logout' onClick={handleLogout}><TfiPowerOff /></button>
                         </div>
                     </div>
-
                 </div>
             </header>
 
@@ -51,8 +53,6 @@ const Home = () => {
                         <li className="nav-link"><Link to='/Inscription' className="nav-item"><IoPersonAdd className='icon' /> Add User</Link></li>
                         <li className="nav-link"><Link className="nav-item" to='/Addcar'><MdAddBox className='icon' /> Add car</Link></li>
                         <li className="nav-link"><Link className="nav-item" to='/User'><FaRegUser className='icon' /> All User</Link></li>
-                        {/* <li className="nav-link"><a href="" className="nav-item"><FaHome />Home</a></li>
-                        <li className="nav-link"><a href="" className="nav-item"><FaHome />Home</a></li> */}
                     </ul>
                 </div>
 
@@ -71,4 +71,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;

@@ -20,20 +20,27 @@ const Login = () => {
       });
 
       if (response.data && response.data.access_token) {
+      
         setIsToken(true);
+        localStorage.setItem('accessToken', response.data.access_token);
+        console.log(response.data.access_token);
+        localStorage.setItem('userName', response.data.userName); // Stockez le nom de l'utilisateur
+     
 
         // Rediriger en fonction du statut de l'utilisateur
         const userStatus = response.data.role;
+        const userName = response.data.userName;
        console.log(userStatus);
+      
       
         switch (userStatus) {
           case 'superAdmin':
             console.log('Connecté en tant que SuperAdmin');
-            navigate('/superadmin');
+            navigate('/home');
             break;
           case 'admin':
             console.log('Connecté en tant qu Admin');
-            navigate('/admin');
+            navigate('/home');
             break;
           default:
             console.log('Connecté en tant que User');
