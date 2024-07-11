@@ -1,24 +1,28 @@
-import AllUser from "./components/AllUser/AllUser"
-import Home from "./components/Home/Home"
-import Login from "./components/Login/Login"
-import AdHome from './components/Admin/Homadmin/AdHome'
-import Dashboard from "./components/Dashboard/Dashboard"
-import Car from "./components/Car/Car"
-import Inscription from "./components/inscription/Inscription"
-import { Route, Routes } from "react-router-dom"
-import UserVue from "./components/VueUser/UserVue"
+import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { TokenContext } from "./TokenContext";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { getToken } from "./utils/common";
+
 function App() {
+  const [isToken, setIsToken] = useState(false);
+
+  useEffect(() => {
+    let token = getToken() ? true : false;
+    setIsToken(token);
+  }, []);
+
   return (
-    <>
-      {/* <Inscription/> */}
-      {/* <AdHome/> */}
-      
+    <TokenContext.Provider value={[isToken, setIsToken]}>
       <Routes>
-        <Route path='/Home' element={<Home />} />
-        <Route path='/Login' element={<Login />} />
+        <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/Login" element={<Login />} />
+        {/* Ajoutez d'autres routes ici */}
       </Routes>
-    </>
-  )
+    </TokenContext.Provider>
+  );
 }
 
-export default App
+export default App;
