@@ -56,7 +56,7 @@ const CarModifAd = () => {
                         <p>Voiture bien entretenue</p>
 
                         <div className="action">
-                            <Link className='linkcar' to={`/Modifcar/${carChek.id}`}><FaUserEdit className='icon' /></Link>
+                            <Link className='linkcar' to={`../Modifcar/${carChek.id}`}><FaUserEdit className='icon' /></Link>
                             <Link className='linkcar'><MdAddBox className='icon' for="file" /></Link>
                         </div>
                         <div className="gallerypar">

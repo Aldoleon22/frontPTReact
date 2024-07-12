@@ -14,15 +14,15 @@ const App = () => {
     if (token) {
       setIsToken(true);
       // Redirection en fonction du statut de l'utilisateur
-      const userStatus = localStorage.getItem("userStatus");
+      const userStatus = localStorage.getItem("role");
       switch (userStatus) {
         case "superAdmin":
-          navigate("/superadmin");
+          navigate("/home");
           break;
         case "admin":
-          navigate("/admin");
+          navigate("/home");
           break;
-        default:
+        case "user":
           navigate("/home");
           break;
       }
@@ -35,11 +35,13 @@ const App = () => {
   return (
     <TokenContext.Provider value={[isToken, setIsToken]}>
       <Routes>
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/home/*" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         {/* Ajoutez d'autres routes ici */}
       </Routes>
     </TokenContext.Provider>
+   
+
   );
 };
 

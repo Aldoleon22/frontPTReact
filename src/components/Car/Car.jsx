@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from "../../assets/image/46.jpg";
-import { Link } from 'react-router-dom';
+
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const Car = () => {
     const [carData, setcarData] =useState([]);
@@ -29,6 +30,16 @@ const Car = () => {
         })
         setcarData(newCarData);
     }
+    const navigate = useNavigate();
+    const userName = localStorage.getItem('userName');
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userStatus');
+        localStorage.removeItem('userName');
+        navigate('/login');
+    }
+    
     
     return (
         <>
@@ -46,7 +57,7 @@ const Car = () => {
                 <p>Matricule: <span>{aff.matricule}</span></p>
             </div>
             <div className="action">
-                 <Link className='modif' to={`/Modifengin/${aff.id}`}>Modifier</Link>
+                 <Link className='modif' to={`./Modifengin/${aff.id}`}>Modifier</Link>
                 <button className='suppr' onClick={()=>handDelete(aff.id)}>Supprimer</button>
             </div>
             </div>

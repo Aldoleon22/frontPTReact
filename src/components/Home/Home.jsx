@@ -15,12 +15,12 @@ import Modifcar from '../Admin/CarAd/Modifcar';
 
 const Home = () => {
     const navigate = useNavigate();
-    const userName = localStorage.getItem('userName'); // Récupérer le nom de l'utilisateur depuis le localStorage
-
+    const userName = localStorage.getItem('userName');
+    localStorage.removeItem('role');
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('userStatus');
-        localStorage.removeItem('userName'); // Supprimer le nom de l'utilisateur lors de la déconnexion
+        
+        localStorage.removeItem('userName');
         navigate('/login');
     }
 
@@ -38,7 +38,7 @@ const Home = () => {
 
                     <div className="user">
                         <img src={Image} alt="" className='imgprof' width={"30px"} />
-                        <p>{userName}</p> {/* Afficher le nom de l'utilisateur ici */}
+                        <p>{userName}</p>
                         <div className="out">
                             <button className='logout' onClick={handleLogout}><TfiPowerOff /></button>
                         </div>
@@ -49,21 +49,21 @@ const Home = () => {
             <div className="content-bar">
                 <div className="aside-bar">
                     <ul>
-                        <li className="nav-link active" ><Link className="nav-item" to='/'><FaHome className='icon' /> Home</Link></li>
-                        <li className="nav-link"><Link to='/Inscription' className="nav-item"><IoPersonAdd className='icon' /> Add User</Link></li>
-                        <li className="nav-link"><Link className="nav-item" to='/Addcar'><MdAddBox className='icon' /> Add car</Link></li>
-                        <li className="nav-link"><Link className="nav-item" to='/User'><FaRegUser className='icon' /> All User</Link></li>
+                        <li className="nav-link active"><Link className="nav-item" to=''><FaHome className='icon' /> Home</Link></li>
+                        <li className="nav-link"><Link to='Inscription' className="nav-item"><IoPersonAdd className='icon' /> Add User</Link></li>
+                        <li className="nav-link"><Link className="nav-item" to='Addcar'><MdAddBox className='icon' /> Add car</Link></li>
+                        <li className="nav-link"><Link className="nav-item" to='User'><FaRegUser className='icon' /> All User</Link></li>
                     </ul>
                 </div>
 
                 <div className="content-element">
                     <Routes>
-                        <Route path='/' element={<Car />} />
-                        <Route path='/Inscription' element={<Inscription />} />
-                        <Route path='/Addcar' element={<AjoutEngin />} />
-                        <Route path='/Modifengin/:id' element={<CarModifAd />} />
-                        <Route path='/User' element={<AllUser />} />
-                        <Route path='/Modifcar/:id' element={<Modifcar />} />
+                        <Route path='' element={<Car />} />
+                        <Route path='Inscription' element={<Inscription />} />
+                        <Route path='Addcar' element={<AjoutEngin />} />
+                        <Route path='Modifengin/:id' element={<CarModifAd />} />
+                        <Route path='User' element={<AllUser />} />
+                        <Route path='Modifcar/:id' element={<Modifcar />} />
                     </Routes>
                 </div>
             </div>

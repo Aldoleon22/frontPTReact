@@ -25,7 +25,7 @@ const Login = () => {
         localStorage.setItem('accessToken', response.data.access_token);
         console.log(response.data.access_token);
         localStorage.setItem('userName', response.data.userName); // Stockez le nom de l'utilisateur
-     
+        localStorage.setItem('role', response.data.role);
 
         // Rediriger en fonction du statut de l'utilisateur
         const userStatus = response.data.role;
