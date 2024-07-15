@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.scss'
+import { useNavigate } from 'react-router'
 const Header = () => {
+  const Navigate = useNavigate();
+  const redirect=()=>{
+      Navigate('/home');
+  }
+
   return (
     <>
       <div className="content">
         <div className="log">
           <h1 className='title_log'>Connexion</h1>
-
           <div className="formu">
             <form action="">
               <div className="inp">
@@ -21,7 +26,7 @@ const Header = () => {
                 <button type="submit">Connexion</button>
               </div>
               <div className="oubl">
-                <p>Mots de passe <a href="">oublier</a>?</p>
+                <p>Mots de passe <a href="" onClick={()=>redirect()}>oublier</a>?</p>
               </div>
             </form>
           </div>

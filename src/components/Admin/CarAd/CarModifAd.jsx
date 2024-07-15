@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import './CarModifAd.scss'
 import Image from '../../../assets/image/46.jpg'
 import { FaUserEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { MdAddBox } from 'react-icons/md';
+import { useDropzone } from 'react-dropzone';
 const CarModifAd = () => {
+    const [image, setimage]= useState([]);
+    const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+        // accept: 'image/*',
+        onDrop: (acceptedFiles) => {
+            setimage(acceptedFiles);
+        },
+    });
+
     return (
         <div>
             <div className="desCar">
@@ -27,15 +36,15 @@ const CarModifAd = () => {
 
                         <div className="action">
                             <Link className='linkcar' to={'/CarAdModif'}><FaUserEdit className='icon' /></Link>
-                            <Link className='linkcar' to={'/addimage'}><MdAddBox className='icon' /></Link>
+                            <Link className='linkcar'  {...getRootProps({ className: 'linkcar' })} ><MdAddBox className='icon' /></Link>
+                            <input {...getInputProps()} />
                         </div>
                         <div className="gallerypar">
                             <h3>Tous les images</h3>
                             <div className="gallery">
-                                <img src={Image} alt="" />
-                                <img src={Image} alt="" />
-                                <img src={Image} alt="" />
-                                <img src={Image} alt="" />
+                                {image.map((fis) => (
+                                    <img key={fis} src={URL.createObjectURL(fis)} />
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,10 @@ import Car from "../Car/Car"
 import Inscription from '../inscription/Inscription';
 import AjoutEngin from '../AjoutEngin/AjoutEngin';
 import ModEngin from '../ModifEngine/ModEngin';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route,Routes } from 'react-router-dom';
+import Addimage from '../Admin/CarAd/Addimage';
+import CarModifAd from '../Admin/CarAd/CarModifAd';
+import Modifcar from '../Admin/CarAd/Modifcar';
 
 // const [show,showset] = useState = false;
 
@@ -44,7 +47,7 @@ const Home = () => {
             <div className="content-bar">
                 <div className="aside-bar">
                     <ul>
-                        <li className="nav-link active" ><Link className="nav-item" to='/'><FaHome className='icon' /> Home</Link></li>
+                        <li className="nav-link active" ><Link className="nav-item" to='/car'><FaHome className='icon' /> Home</Link></li>
                         <li className="nav-link"><Link to='/Inscription' className="nav-item"><IoPersonAdd className='icon' /> Add User</Link></li>
                         <li className="nav-link"><Link className="nav-item" to='/Addcar'><MdAddBox className='icon' /> Add car</Link></li>
                         <li className="nav-link"><Link className="nav-item" to='/User'><FaRegUser className='icon' /> All User</Link></li>
@@ -54,13 +57,16 @@ const Home = () => {
                 </div>
 
                 <div className="content-element">
-                    <Routes>
-                        <Route path='/' element={<Car />} />
+                    <CarModifAd />
+                    {/* <Routes >
+                        <Route path={'/home'} element={<Home />} />
+                        <Route path={'/car'} element={<Car />} />
                         <Route path='/Inscription' element={<Inscription />} />
                         <Route path='/Addcar' element={<AjoutEngin />} />
                         <Route path='/Modifengin/:id' element={<ModEngin />} />
+                        <Route path='/CarAdModif' element={<Modifcar />} />
                         <Route path='/User' element={<AllUser />} />
-                    </Routes>
+                    </Routes > */}
                 </div>
             </div>
         </div>
