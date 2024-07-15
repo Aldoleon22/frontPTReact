@@ -1,63 +1,72 @@
 import React from 'react'
 import Image from "../../assets/image/46.jpg";
-import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
+
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const Car = () => {
-    const [car, setCar] = useState([]);
-    const {id}= useParams();
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/vehic')
-            .then(response => {
-                setCar(response.data.vehic);
-                // console.log(response.data.vehic);
-            })
-            .catch(error => {
-                console.error('Error fetching data: ', error);
-            });
-    }, []);
+    const [carData, setcarData] =useState([]);
+    useEffect(()=>{
+        fetchData();
+    },[])
+    
+    const fetchData = async () => {
+        try {
+            const vehicl =await axios.get("http://127.0.0.1:8000/api/listeVehicul")
+            setcarData(vehicl.data.vehicules);
+            console.log(vehicl);
+        } catch (error) {
+            console.log("verifier le code");
+        }
+    }
 
-    const Del = (id) => {
-        const carId = id;
-        // console.log(id);
-        axios.get(`http://127.0.0.1:8000/api/vehic/${carId}`)
-        .then(() => {
-            setCar(car.filter(car => car.id !== id));
+    //supprime
+    const handDelete = async (id) =>{
+        console.log(id);
+        await  axios.delete('http://127.0.0.1:8000/api/cardelete/'+id);
+        const newCarData = carData.filter((item)=>{
+            return(
+                item.id !== id
+            )
         })
-        .catch(error => {
-            console.error('Error de la suppression car:', error);
-        });
+        setcarData(newCarData);
     }
-    const up = (id)=>{
-        axios.get(`http://127.0.0.1:8000/api/update/${id}`)
+    const navigate = useNavigate();
+    const userName = localStorage.getItem('userName');
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userStatus');
+        localStorage.removeItem('userName');
+        navigate('/login');
     }
+    
     
     return (
         <>
             {
 
-                car.map(cars => (
-
-                    <div className="car" key={cars.id}>
-                        <div className="img-car">
-                            <img src={Image} alt="" className='image-car' />
-                        </div>
-                        <div className='desc'>
-                            <div className="desc-car">
-                                <p>Marque: <span>{cars.marque}</span></p>
-                                <p>Matricule: <span>{cars.matricule}</span></p>
-                            </div>
-                            <div className="action">
-                                <Link className='modif' to={`/Modifengin/${cars.id}`} onclick={()=>up(cars.id)}>Modifier</Link>
-                                <button className='suppr' onClick={()=>Del(cars.id)}>Supprimer</button>
-                            </div>
-                        </div>
-                    </div>
-                ))
-
-            }
-
+            carData.map((aff, i)=>{
+                return(
+                    <div className="car">
+                <div className="img-car">
+                <img src={`http://127.0.0.1:8000/storage/ImageVehicule/${aff.photo}`} alt="" className='image-car' />
+            </div>
+            <div className='desc'>
+                <div className="desc-car">
+                <p>Marque: <span>{aff.marque}</span></p>
+                <p>Matricule: <span>{aff.matricule}</span></p>
+            </div>
+            <div className="action">
+                 <Link className='modif' to={`./Modifengin/${aff.id}`}>Modifier</Link>
+                <button className='suppr' onClick={()=>handDelete(aff.id)}>Supprimer</button>
+            </div>
+            </div>
+            </div>
+                )
+                
+            })
+            
+        }
         </>
     )
 }
